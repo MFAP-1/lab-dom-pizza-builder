@@ -137,14 +137,65 @@ function renderButtons() {
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
+  let totalPriceValue = basePrice; // total price variable
   
-  // toggling the price for PEPPERONI
+  // getting the element for each text div in the price section
+  const pepperoniPriceText = document.getElementById('peperoni-unit-price');
+  const mushroomsPriceText = document.getElementById('mushrooms-unit-price');
+  const greenPepperPriceText = document.getElementById('green-pepper-unit-price');
+  const whiteSaucePriceText = document.getElementById('white-sauce-unit-price');
+  const GlutenFreenCrustPriceText = document.getElementById('gluten-free-crust-unit-price');
+
+
+
+  // Updating the total price for each active item in the menu
   if (state.btn_pepperoni) {
-    pepperoniBtnElement.classList.add('active');
+    totalPriceValue += ingredients.pepperoni.price;
+    pepperoniPriceText.style.display = 'block';
+
   } else {
-    pepperoniBtnElement.classList.remove('active');
+    pepperoniPriceText.style.display = 'none';
+  } 
+
+  if (state.btn_mushrooms) {
+    totalPriceValue += ingredients.mushrooms.price;
+    mushroomsPriceText.style.display = 'block';
+  } else {
+    mushroomsPriceText.style.display = 'none';
+  } 
+
+  if (state.btn_greenPeppers) {
+    totalPriceValue += ingredients.greenPeppers.price;
+    greenPepperPriceText.style.display = 'block';
+  } else {
+    greenPepperPriceText.style.display = 'none';
   }
+
+  if (state.btn_whiteSauce) {
+    totalPriceValue += ingredients.whiteSauce.price;
+    whiteSaucePriceText.style.display = 'block';
+  } else {
+    whiteSaucePriceText.style.display = 'none';
+  }
+
+  if (state.btn_glutenFreeCrust) {
+    totalPriceValue += ingredients.glutenFreeCrust.price;
+    GlutenFreenCrustPriceText.style.display = 'block';
+  } else {
+    GlutenFreenCrustPriceText.style.display = 'none';
+  }
+
+  // Updating the total price in the HTML
+  const totalPriceSlot = document.querySelector('aside strong');
+  totalPriceSlot.innerText = '$'+totalPriceValue;
 }
+// d="peperoni-unit-price">$1 pepperoni</li>
+//         <li id="mushrooms-unit-price">$1 mushrooms</li>
+//         <li id="green-pepper-unit-price">$1 green peppers</li>
+//         <li id="white-sauce-unit-price">$3 white sauce</li>
+//         <li id="gluten-free-crust-unit-price"></li>
+
+
 
 renderEverything();
 
